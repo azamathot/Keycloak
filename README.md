@@ -22,15 +22,17 @@
 
             });
             builder.Services.AddApiAuthorization().AddAccountClaimsPrincipalFactory<CustomUserFactory>();
-public class JwtAuthorizationMessageHandler : AuthorizationMessageHandler
-{
-    public JwtAuthorizationMessageHandler(IAccessTokenProvider provider,
-      NavigationManager navigation)
-      : base(provider, navigation)
-    {
-        ConfigureHandler(authorizedUrls: new[] { "https://localhost:8081" });
-    }
-}
+
+            
+            public class JwtAuthorizationMessageHandler : AuthorizationMessageHandler
+            {
+                public JwtAuthorizationMessageHandler(IAccessTokenProvider provider,
+                  NavigationManager navigation)
+                  : base(provider, navigation)
+                {
+                    ConfigureHandler(authorizedUrls: new[] { "https://localhost:8081" });
+                }
+            }
 
 
     public class CustomUserFactory : AccountClaimsPrincipalFactory<RemoteUserAccount>
@@ -75,6 +77,7 @@ public class JwtAuthorizationMessageHandler : AuthorizationMessageHandler
 #Asp.Net Core Web Api
 
 При использовании библиотеки KeycloakAuthentication и т.д. нужно использовать версию 1.6, т.к. с новыми версиями этот код ломается, т.е. обновления сломают ваш код, поэтому есть решение 2, которое не поломает код из-за обновлений.
+
         builder.Services.AddCors();
         #region Keycloak Работающая версия 1 с использованием AddKeycloakAuthentication...
         //builder.Services.AddKeycloakAuthentication(new KeycloakAuthenticationOptions()
