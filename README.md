@@ -1,5 +1,5 @@
 # Keycloak
-Взаимодействие Blazor Wasm (SPA) с Авторизацией по ролям на Keycloak и отправляющий запрос на микросервис на Asp.Net Core Web Api, где также настроена авторизация. Пример полностью рабочий. После создания Realm на Keycloak для справной работы авторизации по ролям на RBAC, необходимо настроить на Keycloak отправку этих данных https://stackoverflow.com/questions/56327794/role-based-authorization-using-keycloak-and-net-core
+Взаимодействие Blazor Wasm (SPA) с Авторизацией по ролям на Keycloak и отправляющий запрос в микросервис на Asp.Net Core Web Api, где также настроена авторизация. Пример полностью рабочий. После создания Realm на Keycloak для справной работы авторизации по ролям на RBAC, необходимо настроить на Keycloak отправку этих данных https://stackoverflow.com/questions/56327794/role-based-authorization-using-keycloak-and-net-core
 
 #Blazor
 
