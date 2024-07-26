@@ -1,7 +1,6 @@
 ﻿@page "/"
 
 @inject NavigationManager Navigation
-
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
@@ -9,12 +8,12 @@
 <div class="alert alert-warning" role="alert">
     Before authentication will function correctly, you must configure your provider details in <code>Program.cs</code>
 </div>
-<InputText @bind-Value="taskId" />
-<button @onclick="btnClick">Перейти</button>
+<InputText @bind-Value="taskId"/>
+<button @onclick="btnClick" title="Перейти"/>
 
 Welcome to your new app.
 
-@code {
+@code{
 
     string taskId = "1";
     public void btnClick()

@@ -1,0 +1,97 @@
+﻿@page "/chat2/{TaskId:int}"
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IHttpClientFactory Factory
+
+
+@attribute [Authorize]
+
+<h3>Чат</h3>
+<div class="chat-container">
+    <ul id="messages" class="chat-messages">
+        @foreach (var message in messages)
+        {
+            <li class="message @(message.UserId == userId ? "user-message" : "admin-message")">
+                <span class="sender">@message.Sender</span>:
+                <span class="content">@message.Message</span>
+            </li>
+        }
+    </ul>
+    <input type="text" @bind-value="newMessage" placeholder="Введите сообщение" />
+    <button @onclick="SendMessage">Отправить</button>
+</div>
+
+@code {
+    [Parameter]
+    public int TaskId { get; set; }
+    private string userId;
+    private List<ChatMessage> messages = new List<ChatMessage>();
+    private string newMessage;
+
+    private HubConnection hubConnection;
+    private HttpClient Http;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        await GetUserId();
+
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl("http://localhost:8081/chat", options =>
+            {
+                options.AccessTokenProvider = () => GetAccessToken();
+            })
+            .Build();
+
+        await hubConnection.StartAsync();
+        await hubConnection.InvokeAsync("SendMessage", TaskId, "Привет!");
+
+        hubConnection.On<string, string>("ReceiveMessage", (userId, message) =>
+        {
+            messages.Add(new ChatMessage { UserId = userId, Message = message });
+            StateHasChanged();
+        });
+
+        Http = Factory.CreateClient("API");
+        await LoadMessages(TaskId);
+    }
+
+    private async Task GetUserId()
+    {
+        var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authenticationState.User;
+        userId = user.FindFirst(JwtRegisteredClaimNames.Sub).Value;
+    }
+
+    private async Task<string> GetAccessToken()
+    {
+        var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authenticationState.User;
+        var token = JwtAuthorizationMessageHandler.JwtToken;
+        return token;
+    }
+
+    private async Task LoadMessages(int taskId)
+    {
+        var response = await Http.GetFromJsonAsync<List<ChatMessage>>($"api/chat?taskId={taskId}");
+        messages = response;
+    }
+
+    private async Task SendMessage()
+    {
+        if (!string.IsNullOrEmpty(newMessage))
+        {
+            await hubConnection.InvokeAsync("SendMessage", TaskId, newMessage);
+            newMessage = string.Empty;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // var messagesElement = document.getElementById("messages");
+            // messagesElement.scrollTop = messagesElement.scrollHeight;
+        }
+    }
+}

@@ -5,11 +5,11 @@ VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keycloak.Api", "src\Keycloak.Api\Keycloak.Api.csproj", "{A7E10B07-8ED6-4564-942E-8BEAFA03B7A5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keycloak.Blazor", "src\Keycloak.Blazor\Keycloak.Blazor.csproj", "{EECB6800-4EE9-4F1A-BC17-CA594A8359B4}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keycloak.Mvc", "src\Keycloak.Mvc\Keycloak.Mvc.csproj", "{E5C6BA9F-D060-4A72-AE27-99D38FD7D5B7}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "keycloak.vue", "src\Keycloak.Vue\keycloak.vue.esproj", "{EC53D520-9041-4B31-B510-B28D45AEC18A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keycloak.Blazor", "src\Keycloak.Blazor\Keycloak.Blazor.csproj", "{C2C504D1-8311-454B-ABE2-79F7D0976A07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		{A7E10B07-8ED6-4564-942E-8BEAFA03B7A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7E10B07-8ED6-4564-942E-8BEAFA03B7A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7E10B07-8ED6-4564-942E-8BEAFA03B7A5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EECB6800-4EE9-4F1A-BC17-CA594A8359B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EECB6800-4EE9-4F1A-BC17-CA594A8359B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EECB6800-4EE9-4F1A-BC17-CA594A8359B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EECB6800-4EE9-4F1A-BC17-CA594A8359B4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E5C6BA9F-D060-4A72-AE27-99D38FD7D5B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E5C6BA9F-D060-4A72-AE27-99D38FD7D5B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5C6BA9F-D060-4A72-AE27-99D38FD7D5B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,6 +31,10 @@ Global
 		{EC53D520-9041-4B31-B510-B28D45AEC18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC53D520-9041-4B31-B510-B28D45AEC18A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EC53D520-9041-4B31-B510-B28D45AEC18A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C2C504D1-8311-454B-ABE2-79F7D0976A07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2C504D1-8311-454B-ABE2-79F7D0976A07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2C504D1-8311-454B-ABE2-79F7D0976A07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2C504D1-8311-454B-ABE2-79F7D0976A07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

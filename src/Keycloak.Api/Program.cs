@@ -1,3 +1,5 @@
+using Keycloak.Api.Hubs;
+using Keycloak.Api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
@@ -13,6 +15,9 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddCors();
+        builder.Services.AddSignalR();
+        builder.Services.AddScoped<IChatService, ChatService>();
+
         #region Keycloak Работающая версия 1 с использованием AddKeycloakAuthentication...
         //builder.Services.AddKeycloakAuthentication(new KeycloakAuthenticationOptions()
         //{
@@ -39,7 +44,7 @@ public class Program
             {
                 c.MetadataAddress = $"{builder.Configuration["Keycloak:auth-server-url"]}realms/{builder.Configuration["Keycloak:realm"]}/.well-known/openid-configuration";
                 c.RequireHttpsMetadata = false;
-                c.Authority = $"{builder.Configuration["Keycloak:auth-server-url"]}realms/{builder.Configuration["Keycloak:realm"]}/account";
+                c.Authority = $"{builder.Configuration["Keycloak:auth-server-url"]}realms/{builder.Configuration["Keycloak:realm"]}";
                 c.Audience = "account";
             })
             //можно и без нее, работает, он для более тонкой настройки
@@ -122,6 +127,7 @@ public class Program
 
 
         app.MapControllers();
+        app.MapHub<ChatHub>("chat");
 
         app.Run();
     }
